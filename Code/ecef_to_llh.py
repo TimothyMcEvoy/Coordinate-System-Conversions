@@ -17,8 +17,9 @@
 # This work is licensed under CC BY-SA 4.0
 
 # import Python modules
-import math # math module
+# e.g., import math # math module
 import sys  # argv
+import math # math module
 
 # "constants"
 R_E_KM = 6378.1363

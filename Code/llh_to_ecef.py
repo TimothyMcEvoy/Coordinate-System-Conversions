@@ -1,7 +1,7 @@
 # llh_to_ecef.py
 #
 # Usage: python3 llh_to_ecef.py lat_deg lon_deg hae_km
-#  Text explaining script usage
+#  Converts LLH to ECEF vector components
 # Parameters:
 #  Lon: Longtitude from LLH
 #  Lat: Lattitude from LLH
@@ -17,7 +17,7 @@
 # import Python modules
 # e.g., import math # math module
 import sys # argv
-import math
+import math # math module
 # "constants"
 # e.g., R_E_KM = 6378.137
 RE = 6378.1363  # km

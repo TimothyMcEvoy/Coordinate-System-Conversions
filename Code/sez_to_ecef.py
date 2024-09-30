@@ -1,7 +1,7 @@
 # sez_to_ecef.py
 #
 # Usage: python3 sez_to_ecef with o_lat_deg o_lon_deg o_hae_km s_km e_km z_km
-#  Text explaining script usage
+#  Converts sez reference frame to ecef
 # Parameters:
 #  o_lat_deg: lattitude angle in degrees
 #  o_lon_deg: longtitude angle in degrees
@@ -11,7 +11,7 @@
 #  z_km: z component
 #  ...
 # Output:
-#  Converts SEZ to ECEF vectors
+#  ECEF vectors
 #
 # Written by Timothy McEvoy
 # Other contributors: None
@@ -21,10 +21,12 @@
 # import Python modules
 # e.g., import math # math module
 import sys # argv
-import math
+import math # math module
 
 # "constants"
 # e.g., R_E_KM = 6378.137
+RE = 6378.1363  # km
+eE = 0.081819221456  # eccentricity
 
 # helper functions
 
@@ -51,18 +53,35 @@ if len(sys.argv)==7:
 else:
     print(\
         'Usage: '\
-        'python3 llh_to_ecef.py Lat Lon HAE'\
+        'python3 sez_to_ecef.py Lat Lon HAE S E Z'\
         )
     exit()
 
 # write script below this line
 
+
+#Convert to rads
 o_lat_rad = o_lat_deg*(math.pi/180)
 o_lon_rad = o_lon_deg*(math.pi/180)
 
-ecef_x_km = math.cos(o_lon_rad)*math.sin(o_lat_rad)*s_km+math.cos(o_lon_rad)*math.cos(o_lat_rad)*z_km-math.sin(o_lon_rad)*e_km
-ecef_y_km = math.sin(o_lon_rad)*math.sin(o_lat_rad)*s_km+math.sin(o_lon_rad)*math.cos(o_lat_rad)*z_km+math.cos(o_lon_rad)*e_km
-ecef_z_km = -math.cos(o_lat_rad)*s_km+math.sin(o_lat_rad)*z_km
+#ECEF basis vector
+x_basis = math.cos(o_lon_rad)*math.sin(o_lat_rad)*s_km+math.cos(o_lon_rad)*math.cos(o_lat_rad)*z_km-math.sin(o_lon_rad)*e_km
+y_basis = math.sin(o_lon_rad)*math.sin(o_lat_rad)*s_km+math.sin(o_lon_rad)*math.cos(o_lat_rad)*z_km+math.cos(o_lon_rad)*e_km
+z_basis = -math.cos(o_lat_rad)*s_km+math.sin(o_lat_rad)*z_km
+
+# Calculating CE and SE
+CE = RE / math.sqrt(1 - pow(eE, 2) * pow(math.sin(o_lat_rad), 2))
+SE = (RE * (1 - pow(eE, 2))) / math.sqrt(1 - pow(eE, 2) * pow(math.sin(o_lat_rad),2))
+
+# Calculating rx, ry, rz
+r_x_km = (CE + o_hae_km) * math.cos(o_lat_rad) * math.cos(o_lon_rad)
+r_y_km = (CE + o_hae_km) * math.cos(o_lat_rad) * math.sin(o_lon_rad)
+r_z_km = (SE + o_hae_km) * math.sin(o_lat_rad)
+
+#Determine ECEF vector
+ecef_x_km = x_basis+r_x_km
+ecef_y_km = y_basis+r_y_km
+ecef_z_km = z_basis+r_z_km
 
 print(ecef_x_km)
 print(ecef_y_km)
