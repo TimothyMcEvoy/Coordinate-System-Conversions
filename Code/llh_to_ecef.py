@@ -1,33 +1,26 @@
 # llh_to_ecef.py
 #
 # Usage: python3 llh_to_ecef.py lat_deg lon_deg hae_km
-#  Converts LLH to ECEF vector components
+# Converts LLH to ECEF vector components
 # Parameters:
 #  Lon: Longtitude from LLH
 #  Lat: Lattitude from LLH
 #  HAE: Altitude from LLH
 # Output:
-#  ECEF Coordinates
+#  ECEF Coordinates x, y, z
 #
 # Written by Timothy McEvoy
 # Other contributors: None
 #
-# Optional license statement, e.g., See the LICENSE file for the license.
+# This work is licensed under CC BY-SA 4.0
 
 # import Python modules
-# e.g., import math # math module
 import sys # argv
 import math # math module
+
 # "constants"
-# e.g., R_E_KM = 6378.137
 RE = 6378.1363  # km
 eE = 0.081819221456  # eccentricity
-
-# helper functions
-
-## function description
- # def calc_something(param1, param2):
-  # pass
 
 # initialize script arguments
 Lat = float('nan') # Lattitude in LLH
@@ -46,7 +39,7 @@ else:
         )
     exit()
 
-# write script below this line
+# script below this line
 
     # Calculating CE and SE
 CE = RE / math.sqrt(1 - pow(eE, 2) * pow(math.sin(math.radians(Lat)), 2))

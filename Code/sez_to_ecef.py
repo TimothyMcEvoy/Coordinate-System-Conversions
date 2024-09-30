@@ -3,20 +3,19 @@
 # Usage: python3 sez_to_ecef with o_lat_deg o_lon_deg o_hae_km s_km e_km z_km
 #  Converts sez reference frame to ecef
 # Parameters:
-#  o_lat_deg: lattitude angle in degrees
-#  o_lon_deg: longtitude angle in degrees
-#  o_hae_km: Height above earth in km -- hae is actually not necessary at all because we have these other variables!
-#  s_km: s component
-#  e_km: e component
-#  z_km: z component
-#  ...
+#  o_lat_deg: Origin lattitude
+#  o_lon_deg: Origin longtitude
+#  o_hae_km: Origin Altitude
+#  s_km: S component
+#  e_km: E component
+#  z_km: Z component
 # Output:
-#  ECEF vectors
+#  ECEF x, y, z
 #
 # Written by Timothy McEvoy
 # Other contributors: None
 #
-# Optional license statement, e.g., See the LICENSE file for the license.
+# This work is licensed under CC BY-SA 4.0
 
 # import Python modules
 # e.g., import math # math module
@@ -27,12 +26,6 @@ import math # math module
 # e.g., R_E_KM = 6378.137
 RE = 6378.1363  # km
 eE = 0.081819221456  # eccentricity
-
-# helper functions
-
-## function description
-# def calc_something(param1, param2):
-#   pass
 
 # initialize script arguments
 o_lat_deg = float('nan') # Lattitude in SEZ
@@ -57,8 +50,7 @@ else:
         )
     exit()
 
-# write script below this line
-
+# script below this line
 
 #Convert to rads
 o_lat_rad = o_lat_deg*(math.pi/180)

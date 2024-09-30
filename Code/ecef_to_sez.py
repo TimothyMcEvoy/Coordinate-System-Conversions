@@ -3,17 +3,19 @@
 # Usage: python3 ecef_to_sez.py o_x_km o_y_km o_z_km x_km y_km z_km
 #  Converts ECEF reference frame to SEZ
 # Parameters:
-#  o_x_km x in ECEF origin of the SEZ frame
-#  o_y_km y in ECEF origin of the SEZ frame
-#  o_z_km z in ECEF origin of the SEZ frame
-#  ...
+#  o_x_km: origin x in ECEF
+#  o_y_km: origin y in ECEF
+#  o_z_km: origin z in ECEF
+#  x_km: object x in ECEF
+#  y_km: object y in ECEF
+#  z_km: object z in ECEF
 # Output:
-#  SEZ reference frame
+#  SEZ reference frame S, E, Z
 #
 # Written by Timothy McEvoy
 # Other contributors: Brad Denby
 #
-# Optional license statement, e.g., See the LICENSE file for the license.
+# This work is licensed under CC BY-SA 4.0
 
 # import Python modules
 import sys # argv
@@ -46,7 +48,7 @@ else:
         )
     exit()
 
-# write script below this line
+# script below this line
 
 #Get ECEF vector from origin to object
 v_x_km = x_km - o_x_km

@@ -17,7 +17,6 @@
 # This work is licensed under CC BY-SA 4.0
 
 # import Python modules
-# e.g., import math # math module
 import sys  # argv
 import math # math module
 
@@ -48,7 +47,7 @@ else:
   )
   exit()
 
-# write script below this line
+# script below this line
 
 # calculate longitude
 lon_rad = math.atan2(r_y_km,r_x_km)
